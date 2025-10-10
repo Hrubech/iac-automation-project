@@ -37,6 +37,7 @@ Les composants principaux :
 3. Exécutez le script de déploiement :
     ```bash
    bash scripts/deploy.sh
+   ```
    Cela :
    - initialise Terraform et applique les changements,
    - génère un inventaire Ansible,
@@ -54,7 +55,7 @@ Les composants principaux :
 4. **Script deploy.sh** : automatise tout (Terraform + Ansible).
 
 ## 📦 Structure
-
+```
 ├── .gitignore
 ├── README.md
 ├── terraform/
@@ -72,6 +73,7 @@ Les composants principaux :
 │ └── common.sh
 └── docs/
 └── architecture.md
+```
 
 ## 🔐 Sécurité
 
@@ -88,5 +90,5 @@ Les composants principaux :
 
 ## 🧑‍💻 À propos de l’auteur
 
-Hrubech HOMBESSA — Ingénieur DevOps – Cloud, Automatisation & CI/CD.
+Hrubech HOMBESSA — Ingénieur DevOps – Cloud, Automatisation & CI/CD.  
 [Suivez moi sur LinkedIn](https://www.linkedin.com/in/hrubech-hombessa/).
