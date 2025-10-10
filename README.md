@@ -38,11 +38,7 @@ Les composants principaux :
     ```bash
    bash scripts/deploy.sh
    ```
-   Cela :
-   - initialise Terraform et applique les changements,
-   - génère un inventaire Ansible,
-   - exécute le playbook Ansible,
-   - affiche le statut et l’IP publique.
+   Le script initialise Terraform, crée la VM, génère un inventaire Ansible (`inventory.ini`), vérifie la connexion Ansible puis exécute le playbook pour installer Apache et déployer la page de test.
 4. Pour détruire l’infrastructure :
     ```bash
    bash scripts/destroy.sh
@@ -72,7 +68,7 @@ Les composants principaux :
 │ ├── generate_inventory.sh
 │ └── common.sh
 └── docs/
-└── architecture.md
+    └── architecture.md
 ```
 
 ## 🔐 Sécurité
@@ -80,6 +76,7 @@ Les composants principaux :
 - Ne jamais committer votre clé privée .pem.
 - Le fichier .gitignore inclut les entrées nécessaires pour les exclure.
 - Utiliser IAM et rôles minimaux dans AWS.
+- Utilisez des variables d'environnement pour les informations sensibles si besoin.
 
 ## 💡 Extensions possibles
 
