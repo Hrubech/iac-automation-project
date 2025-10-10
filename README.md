@@ -33,8 +33,12 @@ Les composants principaux :
    ```bash
    git clone https://github.com/Hrubech/iac-automation-project.git
    cd iac-automation-project
-2. Configurez vos variables AWS si nécessaire (dans `terraform/variables.tf`).
-3. Exécutez le script de déploiement :
+2. Rendez les scripts exécutables :
+    ```bash
+    chmod +x scripts/*.sh
+3. Configurez vos variables AWS si nécessaire dans `terraform/variables.tf` (AMI selon région, etc.).
+4. Placez votre clé privée ~/.ssh/automation-key.pem et votre clé publique ~/.ssh/automation-key.pub (ne pas committer la clé privée).
+5. Exécutez le script de déploiement :
     ```bash
    bash scripts/deploy.sh
    ```
