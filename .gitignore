@@ -1,0 +1,22 @@
+# SSH keys
+*.pem
+*.pub
+
+# Terraform
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+*.tfvars
+
+# Ansible
+inventory.ini
+
+# OS
+.DS_Store
+
+# Logs
+*.log
+
+# Editor
+.vscode/
+.idea/
