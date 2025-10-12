@@ -4,23 +4,23 @@
   become: true
 
   tasks:
-  - name: Mettre à jour apt
-    apt:
+  - name: Mettre à jour le cache DNF
+    ansible.builtin.dnf:
       update_cache: yes
 
   - name: Installer Apache
-    apt:
-      name: apache2
+    ansible.builtin.dnf:
+      name: httpd
       state: present
 
   - name: Assurer que apache est actif
-    service:
-      name: apache2
+    ansible.builtin.service:
+      name: httpd
       state: started
       enabled: yes
 
   - name: Déployer page de test
-    copy:
+    ansible.builtin.copy:
       dest: /var/www/html/index.html
       content: |
         <html>
@@ -30,6 +30,6 @@
         <p>Cette VM a été provisionnée via Terraform et configurée via Ansible.</p>
         </body>
         </html>
-      owner: www-data
-      group: www-data
+      owner: apache
+      group: apache
       mode: '0644'
