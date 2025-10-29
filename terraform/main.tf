@@ -1,7 +1,7 @@
 resource "aws_key_pair" "automation" {
   key_name   = var.key_name
   # public_key = file(var.ssh_public_key_path)
-  public_key = var.ssh_public_key_path
+  public_key = var.ssh_public_key
 }
 
 # ------------------------------------
