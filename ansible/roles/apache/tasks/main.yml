@@ -1,0 +1,20 @@
+---
+- name: Installer Apache
+  ansible.builtin.dnf:
+    name: httpd
+    state: present
+
+- name: Démarrer et activer le service Apache
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Déployer la page web depuis le template
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: apache
+    group: apache
+    mode: '0644'
+  notify: Restart Apache

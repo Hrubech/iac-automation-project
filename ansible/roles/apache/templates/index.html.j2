@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>{{ page_title }}</title>
+    </head>
+    <body>
+        <h1>{{ message }}</h1>
+        <p>
+            Cette VM a été provisionnée via <strong>Terraform</strong> et configurée via <strong>Ansible</strong>.
+        </p>
+        <p>
+            <b>Serveur :</b> {{ ansible_hostname }}
+        </p>
+        <p>
+            <b>Adresse IP :</b> {{ ansible_default_ipv4.address }}
+        </p>
+        <p>
+            <b>Date de déploiement :</b> {{ ansible_date_time.date }}
+        </p>
+    </body>
+</html>

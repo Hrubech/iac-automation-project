@@ -1,35 +1,6 @@
 ---
-- name: Installer Apache et déployer une page de test
-  hosts: webservers
+- name: Configuration du serveur web Apache
+  hosts: role_apache
   become: true
-
-  tasks:
-  - name: Mettre à jour le cache DNF
-    ansible.builtin.dnf:
-      update_cache: yes
-
-  - name: Installer Apache
-    ansible.builtin.dnf:
-      name: httpd
-      state: present
-
-  - name: Assurer que apache est actif
-    ansible.builtin.service:
-      name: httpd
-      state: started
-      enabled: yes
-
-  - name: Déployer page de test
-    ansible.builtin.copy:
-      dest: /var/www/html/index.html
-      content: |
-        <html>
-        <head><title>Test Apache - IaC Automation</title></head>
-        <body>
-        <h1>Déploiement réussi</h1>
-        <p>Cette VM a été provisionnée via Terraform et configurée via Ansible.</p>
-        </body>
-        </html>
-      owner: apache
-      group: apache
-      mode: '0644'
+  roles:
+    - apache

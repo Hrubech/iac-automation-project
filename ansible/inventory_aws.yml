@@ -1,0 +1,12 @@
+---
+plugin: amazon.aws.ec2
+regions:
+  - us-west-1
+keyed_groups:
+  - key: tags.Name
+    prefix: tag
+filters:
+  instance-state-name: running
+  "tag:Project": iac-webserver
+compose:
+  ansible_host: public_ip_address
