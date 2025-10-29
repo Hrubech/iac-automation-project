@@ -16,6 +16,11 @@ variable "ssh_public_key_path" {
     default = "~/.ssh/automation-key.pub"
 }
 
+variable "ssh_public_key" {
+  description = "Contenu de la clé publique SSH"
+  type        = string
+}
+
 variable "instance_type" {
     description = "Type d'instance EC2"
     type = string
