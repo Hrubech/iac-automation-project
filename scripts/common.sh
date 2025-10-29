@@ -11,5 +11,5 @@ NC="\033[0m"
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SSH_KEY_NAME="automation-key"
-SSH_KEY_PATH="$HOME/.ssh/${SSH_KEY_NAME}.pem"
+SSH_KEY_PATH="$HOME/.ssh/${SSH_KEY_NAME}"
 INVENTORY_FILE="$REPO_ROOT/ansible/inventory.ini"
