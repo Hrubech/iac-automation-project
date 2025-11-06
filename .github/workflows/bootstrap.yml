@@ -17,16 +17,25 @@ jobs:
         with:
           terraform_version: 1.9.0
 
+      # Configurer les identifiants AWS
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
       # Initialiser Terraform et appliquer la configuration
       - name: Init & Apply
         run: |
           cd terraform/bootstrap
-          terraform init
-          terraform apply -auto-approve
+          terraform init -input=false
+          terraform apply -auto-approve -input=false
           BUCKET_NAME=$(terraform output -raw bucket_name)
           echo "S3_BUCKET=$BUCKET_NAME" >> $GITHUB_ENV
+          echo "Backend S3 créé : $BUCKET_NAME"
 
-      - name: Save Bucket Name as Repo Variable
+      - name: Save Bucket Name as GitHub Repo Variable
         uses: actions/github-script@v7
         with:
           script: |
@@ -36,3 +45,8 @@ jobs:
               name: "S3_BUCKET",
               value: process.env.S3_BUCKET
             })
+
+      - name: Confirm Backend Setup
+        run: |
+          echo "Variable GitHub enregistrée : S3_BUCKET=${{ vars.S3_BUCKET }}"
+          echo "Prêt pour le workflow deploy.yml"
