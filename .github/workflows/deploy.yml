@@ -21,9 +21,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # retrieve bucket name from S3 (backend-info.json)
       - name: Retrieve bucket name from S3
         run: |
-          # Liste le backend-info.json dans tous les buckets Terraform possibles
           BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" --output text | grep terraform-backend | head -n1)
           aws s3 cp s3://${BUCKET_NAME}/backend-info.json .
           cat backend-info.json
