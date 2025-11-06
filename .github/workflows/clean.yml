@@ -32,7 +32,7 @@ jobs:
       - name: Empty S3 bucket (standard objects)
         run: |
           echo "Vidage du bucket $S3_BUCKET ..."
-          aws s3 rm s3://$S3_BUCKET --recursive || true
+          aws s3 rm s3://$S3_BUCKET --recursive
 
       - name: Delete all versions and delete markers
         run: |
@@ -41,9 +41,9 @@ jobs:
           | jq -r '.Versions[]?, .DeleteMarkers[]? | [.Key, .VersionId] | @tsv' \
           | while read key version; do
               aws s3api delete-object --bucket $S3_BUCKET --key "$key" --version-id "$version"
-            done || true
+            done
 
       - name: Delete S3 bucket
         run: |
           echo "Suppression du bucket $S3_BUCKET ..."
-          aws s3 rb s3://$S3_BUCKET --force || true
+          aws s3 rb s3://$S3_BUCKET --force
