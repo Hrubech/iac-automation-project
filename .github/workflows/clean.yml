@@ -29,10 +29,19 @@ jobs:
           echo "S3_BUCKET=$S3_BUCKET" >> $GITHUB_ENV
           echo "Bucket trouvé : $S3_BUCKET"
 
-      - name: Empty S3 bucket
+      - name: Empty S3 bucket (standard objects)
         run: |
           echo "Vidage du bucket $S3_BUCKET ..."
           aws s3 rm s3://$S3_BUCKET --recursive || true
+
+      - name: Delete all versions and delete markers
+        run: |
+          echo "Suppression des versions du bucket $S3_BUCKET ..."
+          aws s3api list-object-versions --bucket $S3_BUCKET --output json \
+          | jq -r '.Versions[]?, .DeleteMarkers[]? | [.Key, .VersionId] | @tsv' \
+          | while read key version; do
+              aws s3api delete-object --bucket $S3_BUCKET --key "$key" --version-id "$version"
+            done || true
 
       - name: Delete S3 bucket
         run: |
