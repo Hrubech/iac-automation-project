@@ -14,20 +14,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Installer Terraform
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-
-      # Initialiser Terraform et détruire le backend
-      - name: Destroy Backend
+      - name: Retrieve backend info
         run: |
-          cd terraform/bootstrap
-          terraform init
-          terraform destroy -auto-approve
+          BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" --output text | grep terraform-backend | head -n1)
+          aws s3 cp s3://${BUCKET_NAME}/backend-info.json .
+          export S3_BUCKET=$(jq -r '.bucket_name' backend-info.json)
+          echo "S3_BUCKET=$S3_BUCKET" >> $GITHUB_ENV
+          echo "Bucket trouvé : $S3_BUCKET"
 
-      - name: Delete artifacts
-        uses: peter-evans/delete-artifact@v2
-        with:
-          name: s3-bucket
-        # run: |
-          # echo "Suppression manuelle recommandée : aller dans l’onglet Actions > Artifacts > Supprimer 's3-bucket'"
+      - name: Empty S3 bucket
+        run: |
+          echo "Vidage du bucket $S3_BUCKET ..."
+          aws s3 rm s3://$S3_BUCKET --recursive || true
+
+      - name: Delete S3 bucket
+        run: |
+          echo "Suppression du bucket $S3_BUCKET ..."
+          aws s3 rb s3://$S3_BUCKET --force || true
