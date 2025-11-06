@@ -26,8 +26,11 @@ jobs:
 
       # Initialiser Terraform et appliquer la configuration
       - name: Terraform Init & Apply
-        working-directory: terraform
-        run: terraform init && terraform apply -auto-approve
+        run: |
+          cd terraform/main
+          terraform init -backend-config="bucket=${{ vars.S3_BUCKET }}" \
+                         -backend-config="${{ secrets.AWS_DEFAULT_REGION }}"
+          terraform apply -auto-approve
 
       # Installer Ansible et dépendances
       - name: Install Ansible & AWS collection
@@ -45,12 +48,13 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
 
       # Exécuter le playbook Ansible
+      # Alternative: Using dynamic inventory from AWS EC2
       - name: Run Ansible Playbook
         working-directory: ansible
         run: ansible-playbook -i inventory_aws.yml playbook.yml
 
       # Afficher l'IP du serveur déployé
       - name: Show deployed IP
-        working-directory: terraform
         run: |
+          cd terraform/main
           echo "Site déployé : http://$(terraform output -raw webserver_ip)"

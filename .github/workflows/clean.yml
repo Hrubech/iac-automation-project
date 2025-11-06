@@ -1,0 +1,23 @@
+name: Clean Backend
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout du repo
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Installer Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      # Initialiser Terraform et détruire le backend
+      - name: Destroy Backend
+        run: |
+          cd terraform/bootstrap
+          terraform init
+          terraform destroy -auto-approve

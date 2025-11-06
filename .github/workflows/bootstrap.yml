@@ -1,0 +1,36 @@
+name: Bootstrap Backend
+
+on:
+  workflow_dispatch:
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout du repo
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      # Installer Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      # Initialiser Terraform et appliquer la configuration
+      - name: Init & Apply
+        run: |
+          cd terraform/bootstrap
+          terraform init
+          terraform apply -auto-approve
+          BUCKET_NAME=$(terraform output -raw bucket_name)
+          echo "S3_BUCKET=$BUCKET_NAME" >> $GITHUB_ENV
+
+      - name: Save Bucket Name as Repo Variable
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.actions.updateRepoVariable({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: "S3_BUCKET",
+              value: process.env.S3_BUCKET
+            })
