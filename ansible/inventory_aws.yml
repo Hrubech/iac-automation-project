@@ -1,4 +1,3 @@
----
 plugin: amazon.aws.ec2
 regions:
   - us-west-1
