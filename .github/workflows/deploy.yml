@@ -59,7 +59,7 @@ jobs:
         run: |
           sudo apt-get update -y
           sudo apt-get install -y python3-pip
-          pip install ansible boto3 botocore amazon.aws
+          pip install ansible boto3 botocore
           ansible-galaxy collection install -r ansible/collections/requirements.yml
 
       # Configurer la clé SSH
