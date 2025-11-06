@@ -17,17 +17,18 @@ variable "region" {
   default     = "us-west-1"
 }
 
-variable "bucket_name" {
-  description = "Nom du bucket S3"
-  default     = "terraform-backend-${random_id.suffix.hex}"
-}
-
+# Génère un suffixe aléatoire pour rendre le bucket unique
 resource "random_id" "suffix" {
   byte_length = 4
 }
 
+# On définit un nom de bucket fixe + suffixe
+locals {
+  bucket_name = "terraform-backend-${random_id.suffix.hex}"
+}
+
 resource "aws_s3_bucket" "backend" {
-  bucket = var.bucket_name
+  bucket = local.bucket_name
 
   tags = {
     Name = "terraform-backend"
@@ -51,5 +52,5 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "sse" {
 }
 
 output "bucket_name" {
-  value = aws_s3_bucket.backend.bucket
+  value = local.bucket_name
 }
