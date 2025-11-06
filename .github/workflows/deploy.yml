@@ -3,6 +3,9 @@ name: Deploy Infrastructure with Terraform & Ansible
 on:
   workflow_dispatch:  # déclenchement manuel
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -18,6 +21,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Download S3 bucket artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: s3-bucket
+          path: .
+
+      - name: Load bucket name
+        run: |
+          echo "S3_BUCKET=$(cat s3_bucket.txt)" >> $GITHUB_ENV
+          echo "Bucket S3 utilisé : $S3_BUCKET"
+
       # Installer Terraform
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
@@ -28,8 +42,9 @@ jobs:
       - name: Terraform Init & Apply
         run: |
           cd terraform/main
-          terraform init -backend-config="bucket=${{ vars.S3_BUCKET }}" \
-                         -backend-config="${{ secrets.AWS_DEFAULT_REGION }}"
+          terraform init -backend-config="bucket=${{ env.S3_BUCKET }}" \
+                         -backend-config="${{ secrets.AWS_DEFAULT_REGION }}" \
+                         -backend-config="key=terraform/state.tfstate"
           terraform apply -auto-approve
 
       # Installer Ansible et dépendances
