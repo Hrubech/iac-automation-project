@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write
   contents: read
 
 jobs:
@@ -35,11 +36,12 @@ jobs:
           terraform init -input=false
           terraform apply -auto-approve -input=false
           BUCKET_NAME=$(terraform output -raw bucket_name)
-          echo "$BUCKET_NAME" > s3_bucket.txt
           echo "Backend S3 créé : $BUCKET_NAME"
 
-      - name: Upload bucket name artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: s3-bucket
-          path: terraform/bootstrap/s3_bucket.txt
+      - name: Save bucket name in S3
+        run: |
+          cd terraform/bootstrap
+          BUCKET_NAME=$(terraform output -raw bucket_name)
+          echo "{\"bucket_name\": \"${BUCKET_NAME}\"}" > backend-info.json
+          aws s3 cp backend-info.json s3://${BUCKET_NAME}/backend-info.json
+          echo "Enregistrement du backend-info.json dans ${BUCKET_NAME}"
