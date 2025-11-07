@@ -9,3 +9,4 @@ filters:
   "tag:Project": iac-webserver
 compose:
   ansible_host: public_ip_address
+  ansible_user: ec2-user
