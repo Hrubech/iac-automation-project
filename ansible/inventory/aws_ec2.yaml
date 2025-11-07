@@ -10,3 +10,4 @@ filters:
 compose:
   ansible_host: public_ip_address
   ansible_user: ec2-user
+  instance_tags: tags

@@ -69,8 +69,7 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
-      # Exécuter le playbook Ansible
-      # Alternative: Using dynamic inventory from AWS EC2
+      # Exécuter le playbook Ansible avec inventaire dynamique AWS EC2
       - name: Run Ansible Playbook
         working-directory: ansible
         run: ansible-playbook playbook.yml
