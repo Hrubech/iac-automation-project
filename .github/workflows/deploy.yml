@@ -73,7 +73,7 @@ jobs:
       # Alternative: Using dynamic inventory from AWS EC2
       - name: Run Ansible Playbook
         working-directory: ansible
-        run: ansible-playbook -i aws_ec2.yaml playbook.yml
+        run: ansible-playbook playbook.yml
 
       # Afficher l'IP du serveur déployé
       - name: Show deployed IP
