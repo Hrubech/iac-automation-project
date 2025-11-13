@@ -1,7 +1,7 @@
 name: Bootstrap Backend
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # déclenchement manuel
 
 permissions:
   actions: write
@@ -29,7 +29,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
-      # Initialiser Terraform et appliquer la configuration
+      # Initialiser Terraform et appliquer la configuration (création du bucket S3)
       - name: Init & Apply
         run: |
           cd terraform/bootstrap

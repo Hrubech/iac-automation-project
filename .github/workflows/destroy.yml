@@ -21,16 +21,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download S3 bucket artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: s3-bucket
-          path: .
-
-      - name: Load bucket name
+      # retrieve bucket name from S3 (backend-info.json)
+      - name: Retrieve bucket name from S3
         run: |
-          echo "S3_BUCKET=$(cat s3_bucket.txt)" >> $GITHUB_ENV
-          echo "Bucket S3 utilisé : $S3_BUCKET"
+          BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" --output text | grep terraform-backend | head -n1)
+          aws s3 cp s3://${BUCKET_NAME}/backend-info.json .
+          cat backend-info.json
+          export S3_BUCKET=$(jq -r '.bucket_name' backend-info.json)
+          echo "S3_BUCKET=$S3_BUCKET" >> $GITHUB_ENV
+          echo "Bucket récupéré : $S3_BUCKET"
 
       # Installer Terraform
       - name: Set up Terraform
