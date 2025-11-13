@@ -48,7 +48,7 @@ Crée automatiquement le bucket S3 utilisé comme backend Terraform et enregistr
 2️⃣ **deploy.yml**  
 Déploie l’infrastructure complète et configure le serveur Apache.  
 🔹 Étapes :
-- Télécharge le nom du bucket S3 créé par bootstrap
+- Télécharge le nom du bucket S3 créé par `bootstrap`
 - Initialise Terraform avec ce backend
 - Crée l’instance EC2, la KeyPair, le Security Group, etc.
 - Configure le serveur web Apache via Ansible  
@@ -112,27 +112,27 @@ Supprime le backend S3 et les artefacts restants.
    ```bash
    git clone https://github.com/Hrubech/iac-automation-project.git
    cd iac-automation-project
-2. Déployer l’infrastructure :
+2. Déployer l’infrastructure :  
 Depuis votre dépôt GitHub :  
 - Allez dans **Actions** → **Bootstrap Backend** → **Run workflow**  
   ➜ Cela crée automatiquement le bucket S3 utilisé comme backend Terraform.
-- Puis lancez **Deploy Infrastructure with Terraform & Ansible** (`deploy.yml`)
-  ➜ Terraform crée l’infrastructure, Ansible configure Apache.
+- Puis lancez **Deploy Infrastructure with Terraform & Ansible** (`deploy.yml`)  
+  ➜ Terraform crée l’infrastructure, Ansible configure Apache.  
 🧠 Une fois terminé, vous verrez l’adresse IP publique de la VM dans les logs Terraform :
     ```bash
     Outputs: 
     web_public_ip = "13.56.xxx.xxx"
     ```
 3. Vérifier le déploiement
-Ouvrez votre navigateur et accédez à :  
+- Ouvrez votre navigateur et accédez à :  
 ```bash
     http://<web_public_ip>
 ```
 💡 Si tout s’est bien passé, vous verrez :  
-| 🟢 “Déploiement réussi – IaC Automation”
+| 🟢 “Déploiement réussi – IaC Automation”  
 4. Détruire l’infrastructure
 Détruire l’infrastructure : 
-- Lancez le workflow Destroy Infrastructure (destroy.yml)
+- Lancez le workflow Destroy Infrastructure (destroy.yml)  
   ➜ Supprime l’instance EC2, le security group et la keypair.
 5. Nettoyer le backend
 - Enfin, exécutez **Clean Backend** (`clean.yml`)  
