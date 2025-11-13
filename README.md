@@ -4,7 +4,7 @@
 
 Ce projet met en œuvre une chaîne CI/CD Infrastructure-as-Code (IaC) permettant de :
 - Créer automatiquement une infrastructure AWS avec Terraform.
-- Exécuter un playbook Ansible pour configurer la VM (installation d'Apache et déploiement d'une page de test),
+- Exécuter un playbook Ansible pour configurer la VM (installation d'Apache et déploiement d'une page de test).
 - Orchestrer le tout avec GitHub Actions, sans aucune intervention manuelle.
 
 ## 🧩 Architecture
@@ -38,26 +38,26 @@ Ce projet met en œuvre une chaîne CI/CD Infrastructure-as-Code (IaC) permettan
 4. **GitHub Actions** : automatise tout (Terraform + Ansible).
 
 ## 🧱 Les 4 Workflows
-1️⃣ bootstrap.yml
+1️⃣ **bootstrap.yml**
 Crée automatiquement le bucket S3 utilisé comme backend Terraform et enregistre son nom dans un fichier backend-info.json sur S3.
 🔹 Étapes :
 - Configure les credentials AWS
 - Génère un bucket unique (terraform-backend-xxxxxx)
 - Stocke le nom du bucket pour les workflows suivants
-2️⃣ deploy.yml
+2️⃣ **deploy.yml**
 Déploie l’infrastructure complète et configure le serveur Apache.
 🔹 Étapes :
 - Télécharge le nom du bucket S3 créé par bootstrap
 - Initialise Terraform avec ce backend
 - Crée l’instance EC2, la KeyPair, le Security Group, etc.
 - Configure le serveur web Apache via Ansible
-3️⃣ destroy.yml
+3️⃣ **destroy.yml**
 Détruit proprement toutes les ressources Terraform (VM, SG, KeyPair, etc.).
 🔹 Étapes :
 - Récupère le backend
 - Exécute terraform destroy -auto-approve
 - Supprime les ressources sans laisser de trace
-4️⃣ clean.yml
+4️⃣ **clean.yml**
 Supprime le backend S3 et les artefacts restants.
 🔹 Étapes :
 - Télécharge le fichier backend-info.json
