@@ -43,22 +43,22 @@ Crée automatiquement le bucket S3 utilisé comme backend Terraform et enregistr
 🔹 Étapes :
 - Configure les credentials AWS
 - Génère un bucket unique (terraform-backend-xxxxxx)
-- Stocke le nom du bucket pour les workflows suivants
-2️⃣ **deploy.yml**
-Déploie l’infrastructure complète et configure le serveur Apache.
+- Stocke le nom du bucket pour les workflows suivants  
+2️⃣ **deploy.yml**  
+Déploie l’infrastructure complète et configure le serveur Apache.  
 🔹 Étapes :
 - Télécharge le nom du bucket S3 créé par bootstrap
 - Initialise Terraform avec ce backend
 - Crée l’instance EC2, la KeyPair, le Security Group, etc.
-- Configure le serveur web Apache via Ansible
-3️⃣ **destroy.yml**
-Détruit proprement toutes les ressources Terraform (VM, SG, KeyPair, etc.).
+- Configure le serveur web Apache via Ansible  
+3️⃣ **destroy.yml**  
+Détruit proprement toutes les ressources Terraform (VM, SG, KeyPair, etc.).  
 🔹 Étapes :
 - Récupère le backend
 - Exécute terraform destroy -auto-approve
-- Supprime les ressources sans laisser de trace
-4️⃣ **clean.yml**
-Supprime le backend S3 et les artefacts restants.
+- Supprime les ressources sans laisser de trace  
+4️⃣ **clean.yml**  
+Supprime le backend S3 et les artefacts restants.  
 🔹 Étapes :
 - Télécharge le fichier backend-info.json
 - Vide le contenu du bucket S3
@@ -132,7 +132,7 @@ Détruire l’infrastructure :
 - Lance le workflow Destroy Infrastructure (destroy.yml)
   ➜ Supprime l’instance EC2, le security group et la keypair.
 5. Nettoyer le backend
-- Enfin, exécute Clean Backend S3 (clean.yml)
+- Enfin, exécute Clean Backend S3 (clean.yml)  
   ➜ Cela vide et supprime le bucket S3, ainsi que le fichier backend-info.json.
 
 ## 🔐 Sécurité
@@ -146,8 +146,8 @@ Détruire l’infrastructure :
 
 ✅ 100 % automatisé (création → déploiement → suppression)  
 ✅ Infrastructure reproductible et versionnée  
-✅ Aucune manipulation manuelle requise 
-✅ Compatible AWS, extensible à d’autres providers 
+✅ Aucune manipulation manuelle requise  
+✅ Compatible AWS, extensible à d’autres providers  
 ✅ Workflow modulaire (bootstrap / deploy / destroy / clean)
 
 ## 💡 Extensions possibles
