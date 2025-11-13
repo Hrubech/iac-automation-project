@@ -144,10 +144,10 @@ Détruire l’infrastructure :
 
 ## 📖 Points clés du projet
 
-✅ 100 % automatisé (création → déploiement → suppression)
-✅ Infrastructure reproductible et versionnée
-✅ Aucune manipulation manuelle requise
-✅ Compatible AWS, extensible à d’autres providers
+✅ 100 % automatisé (création → déploiement → suppression)  
+✅ Infrastructure reproductible et versionnée  
+✅ Aucune manipulation manuelle requise 
+✅ Compatible AWS, extensible à d’autres providers 
 ✅ Workflow modulaire (bootstrap / deploy / destroy / clean)
 
 ## 💡 Extensions possibles
