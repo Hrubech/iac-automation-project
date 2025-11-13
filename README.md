@@ -38,8 +38,8 @@ Ce projet met en œuvre une chaîne CI/CD Infrastructure-as-Code (IaC) permettan
 4. **GitHub Actions** : automatise tout (Terraform + Ansible).
 
 ## 🧱 Les 4 Workflows
-1️⃣ **bootstrap.yml**
-Crée automatiquement le bucket S3 utilisé comme backend Terraform et enregistre son nom dans un fichier backend-info.json sur S3.
+1️⃣ **bootstrap.yml**  
+Crée automatiquement le bucket S3 utilisé comme backend Terraform et enregistre son nom dans un fichier backend-info.json sur S3.  
 🔹 Étapes :
 - Configure les credentials AWS
 - Génère un bucket unique (terraform-backend-xxxxxx)
