@@ -112,6 +112,7 @@ Supprime le backend S3 et les artefacts restants.
    ```bash
    git clone https://github.com/Hrubech/iac-automation-project.git
    cd iac-automation-project
+   ```
 
 2. **Déployer l’infrastructure**     
 Depuis votre dépôt GitHub :  
@@ -122,7 +123,7 @@ Depuis votre dépôt GitHub :
 
 🧠 Une fois terminé, vous verrez l’adresse IP publique de la VM dans les logs Terraform :  
     ```bash
-    Outputs:   
+    Outputs:  
     web_public_ip = "13.56.xxx.xxx"
     ```
 
