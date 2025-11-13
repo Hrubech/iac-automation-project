@@ -122,10 +122,10 @@ Depuis votre dépôt GitHub :
   ➜ Terraform crée l’infrastructure, Ansible configure Apache.
 
 🧠 Une fois terminé, vous verrez l’adresse IP publique de la VM dans les logs Terraform :  
-    ```bash
+```bash
     Outputs:  
     web_public_ip = "13.56.xxx.xxx"
-    ```
+```
 
 3. **Vérifier le déploiement**
 - Ouvrez votre navigateur et accédez à :  
