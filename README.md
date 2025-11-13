@@ -120,9 +120,9 @@ Depuis votre dépôt GitHub :
 - Puis lancez **Deploy Infrastructure with Terraform & Ansible** (`deploy.yml`)  
   ➜ Terraform crée l’infrastructure, Ansible configure Apache.
 
-🧠 Une fois terminé, vous verrez l’adresse IP publique de la VM dans les logs Terraform :
+🧠 Une fois terminé, vous verrez l’adresse IP publique de la VM dans les logs Terraform :  
     ```bash
-    Outputs: 
+    Outputs:   
     web_public_ip = "13.56.xxx.xxx"
     ```
 
@@ -137,7 +137,7 @@ Depuis votre dépôt GitHub :
 4. **Détruire l’infrastructure** 
 - Lancez le workflow **Destroy Infrastructure** (`destroy.yml`)  
   ➜ Supprime l’instance EC2, le security group et la keypair.
-  
+
 5. **Nettoyer le backend**
 - Enfin, exécutez **Clean Backend** (`clean.yml`)  
   ➜ Cela vide et supprime le bucket S3, ainsi que le fichier `backend-info.json`.
