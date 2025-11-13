@@ -43,7 +43,8 @@ Crée automatiquement le bucket S3 utilisé comme backend Terraform et enregistr
 🔹 Étapes :
 - Configure les credentials AWS
 - Génère un bucket unique (terraform-backend-xxxxxx)
-- Stocke le nom du bucket pour les workflows suivants  </br>
+- Stocke le nom du bucket pour les workflows suivants  
+
 2️⃣ **deploy.yml**  
 Déploie l’infrastructure complète et configure le serveur Apache.  
 🔹 Étapes :
