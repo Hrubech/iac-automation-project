@@ -108,11 +108,11 @@ Supprime le backend S3 et les artefacts restants.
 
 ## 🧪 Déploiement & Tests
 
-1. Clonez ce dépôt :  
+1. **Clonez ce dépôt**  
    ```bash
    git clone https://github.com/Hrubech/iac-automation-project.git
    cd iac-automation-project
-2. Déployer l’infrastructure :  
+2. **Déployer l’infrastructure**     
 Depuis votre dépôt GitHub :  
 - Allez dans **Actions** → **Bootstrap Backend** → **Run workflow**  
   ➜ Cela crée automatiquement le bucket S3 utilisé comme backend Terraform.
@@ -123,18 +123,18 @@ Depuis votre dépôt GitHub :
     Outputs: 
     web_public_ip = "13.56.xxx.xxx"
     ```
-3. Vérifier le déploiement
+3. **Vérifier le déploiement**
 - Ouvrez votre navigateur et accédez à :  
 ```bash
     http://<web_public_ip>
 ```
 💡 Si tout s’est bien passé, vous verrez :  
 | 🟢 “Déploiement réussi – IaC Automation”  
-4. Détruire l’infrastructure
+4. **Détruire l’infrastructure**
 Détruire l’infrastructure : 
 - Lancez le workflow Destroy Infrastructure (destroy.yml)  
   ➜ Supprime l’instance EC2, le security group et la keypair.
-5. Nettoyer le backend
+5. **Nettoyer le backend**
 - Enfin, exécutez **Clean Backend** (`clean.yml`)  
   ➜ Cela vide et supprime le bucket S3, ainsi que le fichier `backend-info.json`.
 
