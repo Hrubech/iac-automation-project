@@ -43,20 +43,20 @@ Crée automatiquement le bucket S3 utilisé comme backend Terraform et enregistr
 🔹 Étapes :
 - Configure les credentials AWS
 - Génère un bucket unique (terraform-backend-xxxxxx)
-- Stocke le nom du bucket pour les workflows suivants  \n
+- Stocke le nom du bucket pour les workflows suivants  </br>
 2️⃣ **deploy.yml**  
 Déploie l’infrastructure complète et configure le serveur Apache.  
 🔹 Étapes :
 - Télécharge le nom du bucket S3 créé par bootstrap
 - Initialise Terraform avec ce backend
 - Crée l’instance EC2, la KeyPair, le Security Group, etc.
-- Configure le serveur web Apache via Ansible  
+- Configure le serveur web Apache via Ansible  </br>
 3️⃣ **destroy.yml**  
 Détruit proprement toutes les ressources Terraform (VM, SG, KeyPair, etc.).  
 🔹 Étapes :
 - Récupère le backend
 - Exécute terraform destroy -auto-approve
-- Supprime les ressources sans laisser de trace  
+- Supprime les ressources sans laisser de trace  </br>
 4️⃣ **clean.yml**  
 Supprime le backend S3 et les artefacts restants.  
 🔹 Étapes :
